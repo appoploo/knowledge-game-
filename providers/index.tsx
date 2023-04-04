@@ -250,7 +250,9 @@ export function SettingsProvider(props: { children: ReactNode }) {
       }}
     >
       {/* when is muted true the music isn't playing , but when muted is false the music is playing */}
-      {!state.muted && <audio ref={ref} autoPlay src="/audio/music.mp3" />}
+      {!state.muted && (
+        <audio ref={ref} autoPlay src="/audio/chill-chords-143504.mp3" />
+      )}
 
       {/* <audio autoPlay src={sound} /> */}
 

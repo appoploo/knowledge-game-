@@ -26,22 +26,28 @@ export default function App({ Component, pageProps }: AppProps) {
           router.replace(router.asPath, router.asPath, { locale });
           setLang(locale);
         }}
-        className="absolute top-0  left-0 z-50 block w-fit  cursor-pointer appearance-none border-white bg-transparent py-4 text-center font-bold text-black outline-none xs:px-1   xs:text-lg md:px-3   md:text-2xl lg:text-lg"
+        className="absolute top-0  left-0 z-50 block w-fit  cursor-pointer appearance-none border-white bg-transparent py-4  outline-none   "
       >
-        <option
-          className=" bg-black  text-yellow-500 xs:text-lg md:text-2xl lg:text-lg  "
-          value="en"
-        >
-          🇬🇧
+        <option className="bg-black " value="en">
+          <picture>
+            <img
+              className="h-2 w-2"
+              src="/images/game/icons/uk-flag.png"
+              alt="flag of England"
+            />
+          </picture>
         </option>
-        <option
-          className="bg-black  text-yellow-500 xs:text-lg md:text-2xl lg:text-lg  "
-          value="el"
-        >
-          🇬🇷
+        <option className="bg-black" value="el">
+          <picture>
+            <img
+              className="h-2 w-2"
+              src="/images/game/icons/greek-flag.png"
+              alt="flag of Greece"
+            />
+          </picture>
         </option>
       </select>
-      <Component {...pageProps} />
+      <Component className="font-style" {...pageProps} />
     </SettingsProvider>
   );
 }

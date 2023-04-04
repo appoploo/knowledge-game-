@@ -29,12 +29,38 @@ export default function GameOver() {
             "text-center font-extrabold text-red-700  xs:text-3xl md:text-5xl  "
           )}
         >
-          <h2 className="mb-4 xs:text-2xl md:text-4xl lg:text-5xl">
-            {t("category")} :
-            {settings.category === "culturalΗeritage"
-              ? t("culturalΗeritage")
-              : t("libraryContent")}
-          </h2>
+          <div className="mb-4 flex gap-2 ">
+            <label className="xs:text-2xl md:text-4xl lg:text-5xl">
+              {t("category")} :
+            </label>
+            {settings.category === "culturalΗeritage" ? (
+              <div className="flex gap-2">
+                <picture className="mt-2">
+                  <img
+                    className="h-8 w-8"
+                    src="/images/game/icons/cultural.png"
+                    alt="culture icon"
+                  />
+                </picture>
+                <label className="xs:text-2xl md:text-4xl lg:text-5xl">
+                  {t("culturalΗeritage")}
+                </label>
+              </div>
+            ) : (
+              <div className="flex gap-2">
+                <picture className="mt-2">
+                  <img
+                    className="h-8 w-8"
+                    src="/images/game/icons/library.png"
+                    alt="books icon"
+                  />
+                </picture>
+                <label className="xs:text-2xl md:text-4xl lg:text-5xl">
+                  {t("libraryContent")}
+                </label>
+              </div>
+            )}
+          </div>
           <h2 className="mb-4">
             {t("score")} : {match.length}
           </h2>

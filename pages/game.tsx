@@ -5,7 +5,7 @@ import { clsx } from "clsx";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useCountdown } from "usehooks-ts";
 
 export default function Game() {
@@ -13,6 +13,8 @@ export default function Game() {
   const { locale } = useRouter();
   const settings = useSettings();
   const t = useT();
+  const mute = settings.muted;
+  const refaudioend = useRef<HTMLAudioElement>(null);
 
   const [count, { startCountdown }] = useCountdown({
     countStart: settings.startingTime,
@@ -53,46 +55,93 @@ export default function Game() {
       </Head>
       <div>
         <div>
-          <div className=" h-full min-h-screen w-screen bg-indigo-400 bg-gradient-to-r xs:py-6 md:py-8 lg:py-4 2xl:py-8">
+          <div className=" whole-bg h-full min-h-screen w-screen  bg-gradient-to-r xs:py-6 md:py-8 lg:py-4 2xl:py-8">
             <div className="grid xs:grid-cols-[70px_250px_70px] md:grid-cols-[200px_400px_220px] lg:grid-cols-[300px_400px_320px] xl:grid-cols-[300px_700px_320px] 2xl:grid-cols-[300px_1fr_320px]">
               <div className=" h-full w-full">
                 <Link
                   role="button"
                   href={`/category`}
-                  className="  xs:ml-9 xs:text-2xl md:ml-20 md:h-12 md:w-10 md:text-4xl lg:ml-48 lg:text-2xl"
+                  className=" flex xs:ml-9  md:ml-20 md:h-12 md:w-10  lg:ml-48 "
                 >
-                  ⬅️
+                  <picture>
+                    <img
+                      className="h-8 w-8"
+                      src="/images/game/icons/back.png"
+                      alt="back arrow icon"
+                    />
+                  </picture>
                 </Link>
               </div>
 
               <div className="flex flex-col items-center justify-center ">
-                <h1 className="text-shadow h-fit w-fit text-center font-extrabold text-yellow-300 xs:text-2xl md:text-4xl  lg:text-3xl xl:text-5xl  ">
-                  Knowledge Game 📚
-                </h1>
+                <div className="flex  items-center justify-center gap-4">
+                  <h1 className="text-shadow h-fit w-fit text-center font-extrabold text-white xs:text-2xl md:text-4xl  lg:text-3xl xl:text-5xl  ">
+                    Knowledge Game
+                  </h1>
+                  <picture>
+                    <img
+                      className="h-8 w-8"
+                      src="/images/game/icons/library.png"
+                      alt="books icon"
+                    />
+                  </picture>
+                </div>
+
                 <br />
               </div>
               <div className="flex h-full w-full items-center">
                 <button
-                  className={clsx(
-                    "rounded-lg border bg-yellow-300 text-xl shadow xs:mr-1 xs:h-fit xs:w-fit md:ml-20 md:h-12 md:w-10 lg:h-fit  lg:w-fit",
-                    {
-                      "link-error line-through": settings.muted,
-                    }
-                  )}
+                  className=" h-fit  w-fit  text-xl xs:mr-1  xs:w-fit md:ml-20"
                   onClick={() => {
                     settings.setMute(!settings.muted); // sets the sound
                   }}
                 >
-                  🔊
+                  {mute ? (
+                    <picture>
+                      <img
+                        className="h-6 w-6"
+                        src="/images/game/icons/sound-on.png"
+                        alt="audio on icon"
+                      />
+                    </picture>
+                  ) : (
+                    <picture>
+                      <img
+                        className="h-6 w-6"
+                        src="/images/game/icons/sound-off.png"
+                        alt="audio off icon"
+                      />
+                    </picture>
+                  )}
                 </button>
               </div>
             </div>
 
             <hr className="w-full opacity-40 xs:my-6 md:my-8 lg:my-3 2xl:my-8 "></hr>
-            <div className="text-shadow  w-full text-center font-extrabold text-yellow-400 xs:pb-4 xs:text-xl  md:pb-4 md:text-3xl  lg:text-2xl xl:text-3xl ">
-              {settings.category === "culturalΗeritage"
-                ? `${t("culturalΗeritage")}`
-                : `${t("libraryContent")}`}
+            <div className="text-shadow grid h-fit w-full place-items-center font-extrabold text-white xs:pb-4 xs:text-xl  md:pb-4 md:text-3xl  lg:text-2xl xl:text-3xl ">
+              {settings.category === "culturalΗeritage" ? (
+                <div className="flex gap-2">
+                  <picture className="mt-2">
+                    <img
+                      className="h-6 w-6"
+                      src="/images/game/icons/cultural.png"
+                      alt="culture icon"
+                    />
+                  </picture>
+                  <label>{t("culturalΗeritage")}</label>
+                </div>
+              ) : (
+                <div className="flex gap-2">
+                  <picture className="mt-2">
+                    <img
+                      className="h-6 w-6"
+                      src="/images/game/icons/library.png"
+                      alt="books icon"
+                    />
+                  </picture>
+                  <label>{t("libraryContent")}</label>
+                </div>
+              )}
             </div>
 
             <div className="grid  h-full  w-full place-items-center  ">
@@ -106,7 +155,7 @@ export default function Game() {
                     className={clsx(
                       "flex gap-3 font-bold  ",
                       {
-                        "text-yellow-300 xs:text-lg md:text-3xl lg:text-xl 2xl:text-3xl":
+                        "text-white xs:text-lg md:text-3xl lg:text-xl 2xl:text-3xl":
                           count >= 10,
                       },
                       {
@@ -119,14 +168,14 @@ export default function Game() {
                     <div>{count}</div>
                   </div>
 
-                  <div className="flex w-full items-center justify-center font-bold text-yellow-300 xs:text-lg md:text-3xl lg:text-xl 2xl:text-3xl">
+                  <div className="flex w-full items-center justify-center font-bold text-white xs:text-lg md:text-3xl lg:text-xl 2xl:text-3xl">
                     <h2>
                       {t("score")} : {settings.match.length}
                     </h2>
                   </div>
                   <div
                     className={clsx(
-                      " h-full w-full  font-bold  text-yellow-300  xs:text-lg md:text-3xl lg:text-xl 2xl:text-3xl",
+                      " h-full w-full  font-bold  text-white  xs:text-lg md:text-3xl lg:text-xl 2xl:text-3xl",
                       { " flex items-end justify-end": locale === "en" }
                     )}
                   >
@@ -137,6 +186,15 @@ export default function Game() {
                 </div>
               </div>
               <div onClick={startCountdown}>
+                {!settings.muted && count < 1 ? (
+                  <audio
+                    ref={refaudioend}
+                    autoPlay
+                    src="/audio/end-of-time.mp3"
+                  />
+                ) : (
+                  ""
+                )}
                 <CardGame />
               </div>
             </div>
