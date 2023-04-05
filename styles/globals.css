@@ -87,6 +87,8 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  font-family: "Jura";  /* sets the font family of your choice */
+ 
 }
 
 body {
@@ -163,6 +165,3 @@ a {
   background-color: rgb(#faebdc);
 }
 
-.font-style {
-  font-family: "/Jura/Jura-VariableFont_wght.ttf" ;
-}

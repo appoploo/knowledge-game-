@@ -5,7 +5,7 @@ import { clsx } from "clsx";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useCountdown } from "usehooks-ts";
 
 export default function Game() {
@@ -14,7 +14,9 @@ export default function Game() {
   const settings = useSettings();
   const t = useT();
   const mute = settings.muted;
-  const refaudioend = useRef<HTMLAudioElement>(null);
+  const audioendoftime = () => new Audio("/audio/end-of-time.mp3");
+  const audioformatch = () => new Audio("/audio/correct.mp3");
+  const audioformistake = () => new Audio("/audio/wrong.mp3");
 
   const [count, { startCountdown }] = useCountdown({
     countStart: settings.startingTime,
@@ -48,6 +50,28 @@ export default function Game() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count, settings.match.length, settings.matchesToWin, router]);
 
+  // sets the audio when the time is over
+  useEffect(() => {
+    if (!settings.muted && count === 1) audioendoftime().play();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count]);
+
+  // sets the audio when you find a match
+  useEffect(() => {
+    if (!settings.muted) audioformatch().play();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings.match.length]);
+
+  // sets the audio when you make a mistake with matching
+  useEffect(() => {
+    if (
+      !settings.muted &&
+      settings.flipCard1.name !== settings.flipCard2.name &&
+      settings.flipCard2.idx !== -1
+    )
+      audioformistake().play();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings.flipCard1, settings.flipCard2]);
   return (
     <div className=" h-screen w-screen overflow-hidden">
       <Head>
@@ -68,6 +92,7 @@ export default function Game() {
                       className="h-8 w-8"
                       src="/images/game/icons/back.png"
                       alt="back arrow icon"
+                      draggable={false}
                     />
                   </picture>
                 </Link>
@@ -83,6 +108,7 @@ export default function Game() {
                       className="h-8 w-8"
                       src="/images/game/icons/library.png"
                       alt="books icon"
+                      draggable={false}
                     />
                   </picture>
                 </div>
@@ -102,6 +128,7 @@ export default function Game() {
                         className="h-6 w-6"
                         src="/images/game/icons/sound-on.png"
                         alt="audio on icon"
+                        draggable={false}
                       />
                     </picture>
                   ) : (
@@ -110,6 +137,7 @@ export default function Game() {
                         className="h-6 w-6"
                         src="/images/game/icons/sound-off.png"
                         alt="audio off icon"
+                        draggable={false}
                       />
                     </picture>
                   )}
@@ -126,6 +154,7 @@ export default function Game() {
                       className="h-6 w-6"
                       src="/images/game/icons/cultural.png"
                       alt="culture icon"
+                      draggable={false}
                     />
                   </picture>
                   <label>{t("culturalΗeritage")}</label>
@@ -137,6 +166,7 @@ export default function Game() {
                       className="h-6 w-6"
                       src="/images/game/icons/library.png"
                       alt="books icon"
+                      draggable={false}
                     />
                   </picture>
                   <label>{t("libraryContent")}</label>
@@ -186,15 +216,6 @@ export default function Game() {
                 </div>
               </div>
               <div onClick={startCountdown}>
-                {!settings.muted && count < 1 ? (
-                  <audio
-                    ref={refaudioend}
-                    autoPlay
-                    src="/audio/end-of-time.mp3"
-                  />
-                ) : (
-                  ""
-                )}
                 <CardGame />
               </div>
             </div>

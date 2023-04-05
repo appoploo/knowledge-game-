@@ -40,6 +40,7 @@ export default function GameOver() {
                     className="h-8 w-8"
                     src="/images/game/icons/cultural.png"
                     alt="culture icon"
+                    draggable={false}
                   />
                 </picture>
                 <label className="xs:text-2xl md:text-4xl lg:text-5xl">
@@ -53,6 +54,7 @@ export default function GameOver() {
                     className="h-8 w-8"
                     src="/images/game/icons/library.png"
                     alt="books icon"
+                    draggable={false}
                   />
                 </picture>
                 <label className="xs:text-2xl md:text-4xl lg:text-5xl">

@@ -218,6 +218,7 @@ export function SettingsProvider(props: { children: ReactNode }) {
         ...state,
         clicks: state.clicks + 1,
         match: [...state.match, flipCard2.name],
+        ...clearCards,
       });
     } else setState({ ...state, flipCard2, clicks: state.clicks + 1 });
   }
@@ -231,12 +232,6 @@ export function SettingsProvider(props: { children: ReactNode }) {
   useEffect(() => {
     if (ref.current) ref.current.volume = 0.1;
   }, [state.muted]);
-  // let s = (e) => {
-  //   setSound(e);
-  //   setTimeiout(() => {
-  //     MediaStreamAudioSourceNode("0000000000000000");
-  //   });
-  // };
 
   return (
     <Context.Provider
@@ -251,10 +246,8 @@ export function SettingsProvider(props: { children: ReactNode }) {
     >
       {/* when is muted true the music isn't playing , but when muted is false the music is playing */}
       {!state.muted && (
-        <audio ref={ref} autoPlay src="/audio/chill-chords-143504.mp3" />
+        <audio loop ref={ref} autoPlay src="/audio/chill-chords-143504.mp3" />
       )}
-
-      {/* <audio autoPlay src={sound} /> */}
 
       {props.children}
     </Context.Provider>

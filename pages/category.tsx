@@ -30,6 +30,7 @@ export default function Category() {
                     className="h-8 w-8"
                     src="/images/game/icons/back.png"
                     alt="back arrow icon"
+                    draggable={false}
                   />
                 </picture>
               </Link>
@@ -53,6 +54,7 @@ export default function Category() {
                       className="h-6 w-6"
                       src="/images/game/icons/sound-on.png"
                       alt="audio on icon"
+                      draggable={false}
                     />
                   </picture>
                 ) : (
@@ -61,6 +63,7 @@ export default function Category() {
                       className="h-6 w-6"
                       src="/images/game/icons/sound-off.png"
                       alt="audio off icon"
+                      draggable={false}
                     />
                   </picture>
                 )}

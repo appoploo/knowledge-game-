@@ -14,40 +14,57 @@ export default function App({ Component, pageProps }: AppProps) {
   };
 
   const setLang = (e: string) => {
-    if (typeof window !== "undefined") localStorage.setItem("lang", e);
+    if (typeof window !== "undefined") {
+      router.push("/", "/", {
+        locale: e,
+      });
+
+      localStorage.setItem("lang", e);
+    }
   };
+
+  const src =
+    getLang() === "en"
+      ? "/images/game/icons/uk-flag.png"
+      : "/images/game/icons/greek-flag.png";
 
   return (
     <SettingsProvider>
-      <select
-        value={getLang()}
-        onChange={(evt) => {
-          const locale = evt.currentTarget.value;
-          router.replace(router.asPath, router.asPath, { locale });
-          setLang(locale);
-        }}
-        className="absolute top-0  left-0 z-50 block w-fit  cursor-pointer appearance-none border-white bg-transparent py-4  outline-none   "
-      >
-        <option className="bg-black " value="en">
-          <picture>
-            <img
-              className="h-2 w-2"
-              src="/images/game/icons/uk-flag.png"
-              alt="flag of England"
-            />
-          </picture>
-        </option>
-        <option className="bg-black" value="el">
-          <picture>
-            <img
-              className="h-2 w-2"
-              src="/images/game/icons/greek-flag.png"
-              alt="flag of Greece"
-            />
-          </picture>
-        </option>
-      </select>
-      <Component className="font-style" {...pageProps} />
+      <div className="fixed top-4 left-4  z-50  h-fit ">
+        <div className="dropdown dropdown-hover">
+          <label tabIndex={0}>
+            <picture>
+              <img className="h-7 w-7" src={src} alt="" />
+            </picture>
+          </label>
+          <ul
+            tabIndex={0}
+            className="dropdown-content  menu rounded-box  w-16 bg-transparent"
+          >
+            <li>
+              <picture>
+                <img
+                  onClick={() => setLang("el")}
+                  className="h-full w-full"
+                  src="/images/game/icons/greek-flag.png"
+                  alt="flag of Greece"
+                />
+              </picture>
+            </li>
+            <li>
+              <picture>
+                <img
+                  onClick={() => setLang("en")}
+                  className="h-full w-full"
+                  src="/images/game/icons/uk-flag.png"
+                  alt="flag of England"
+                />
+              </picture>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <Component {...pageProps} />
     </SettingsProvider>
   );
 }

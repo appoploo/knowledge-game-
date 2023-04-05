@@ -31,6 +31,7 @@ export default function Home() {
                 className="h-8 w-8"
                 src="/images/game/icons/library.png"
                 alt="books icon"
+                draggable={false}
               />
             </picture>
           </div>
@@ -51,6 +52,7 @@ export default function Home() {
                     className="h-6 w-6"
                     src="/images/game/icons/start-game.png"
                     alt="play icon"
+                    draggable={false}
                   />
                 </picture>
                 <div>{t("startGame")}</div>
@@ -97,8 +99,9 @@ export default function Home() {
                   className="h-6 w-6"
                   src="/images/game/icons/info-2.png"
                   alt="instructions icon"
+                  draggable={false}
                 />
-              </picture>{" "}
+              </picture>
               <div>{t("instructions")}</div>
             </button>
 
@@ -108,6 +111,7 @@ export default function Home() {
               type="checkbox"
               id="my-modal"
               className="modal-toggle"
+              draggable={false}
             />
 
             <div className="modal ">
@@ -133,6 +137,7 @@ export default function Home() {
                         className="h-6 w-6"
                         src="/images/game/icons/cultural.png"
                         alt="culture icon"
+                        draggable={false}
                       />
                     </picture>
                     <label>{t("culturalΗeritage")}</label>
@@ -143,6 +148,7 @@ export default function Home() {
                         className="h-6 w-6"
                         src="/images/game/icons/library.png"
                         alt="books icon"
+                        draggable={false}
                       />
                     </picture>
                     <label>{t("libraryContent")}</label>

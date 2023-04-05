@@ -7,7 +7,7 @@ export function CardGame() {
   const settings = useSettings();
   const router = useRouter();
 
-  const suffledLevelCards = useMemo(
+  const suffledCategoryCards = useMemo(
     () => settings.categoryCards.sort((a, b) => -1 + Math.random() * 3),
     [settings.categoryCards]
   );
@@ -15,7 +15,7 @@ export function CardGame() {
   const audio = () => new Audio("/audio/click.mp3");
   return (
     <div className="grid select-none grid-cols-4  gap-3">
-      {suffledLevelCards.map((c, idx) => {
+      {suffledCategoryCards.map((c, idx) => {
         return (
           <div
             className={clsx({
