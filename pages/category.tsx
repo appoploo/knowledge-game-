@@ -52,8 +52,8 @@ export default function Category() {
                   <picture>
                     <img
                       className="h-6 w-6"
-                      src="/images/game/icons/sound-on.png"
-                      alt="audio on icon"
+                      src="/images/game/icons/sound-off.png"
+                      alt="audio off icon"
                       draggable={false}
                     />
                   </picture>
@@ -61,8 +61,8 @@ export default function Category() {
                   <picture>
                     <img
                       className="h-6 w-6"
-                      src="/images/game/icons/sound-off.png"
-                      alt="audio off icon"
+                      src="/images/game/icons/sound-on.png"
+                      alt="audio on icon"
                       draggable={false}
                     />
                   </picture>
