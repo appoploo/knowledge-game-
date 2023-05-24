@@ -146,7 +146,7 @@ export default function Game() {
             </div>
 
             <hr className="w-full opacity-40 xs:my-6 md:my-8 lg:my-3 2xl:my-8 "></hr>
-            <div className="text-shadow grid h-fit w-full place-items-center font-extrabold text-white xs:pb-4 xs:text-xl  md:pb-4 md:text-3xl  lg:text-2xl xl:text-3xl ">
+            <div className="text-shadow grid h-fit w-full place-items-center font-extrabold text-white xs:pb-4 xs:text-xl  md:pb-4 md:text-4xl  lg:text-3xl xl:text-4xl ">
               {settings.category === "culturalΗeritage" ? (
                 <div className="flex gap-2">
                   <picture className="mt-2">
@@ -180,16 +180,16 @@ export default function Game() {
                   "xs:w-5/6 md:w-4/6 lg:w-fit xl:w-1/3 ": locale === "en",
                 })}
               >
-                <div className="mb-4 grid w-full grid-cols-3 ">
+                <div className="mb-2 grid w-full grid-cols-3 ">
                   <div
                     className={clsx(
                       "flex gap-3 font-bold  ",
                       {
-                        "text-white xs:text-lg md:text-3xl lg:text-xl 2xl:text-3xl":
+                        "text-white xs:text-lg md:text-4xl lg:text-3xl xl:text-4xl ":
                           count >= 10,
                       },
                       {
-                        "blink text-red-700 xs:text-lg md:text-4xl lg:text-2xl 2xl:text-4xl":
+                        "blink text-red-700 xs:text-lg md:text-5xl lg:text-4xl xl:text-5xl ":
                           count < 10,
                       }
                     )}
@@ -198,14 +198,14 @@ export default function Game() {
                     <div>{count}</div>
                   </div>
 
-                  <div className="flex w-full items-center justify-center font-bold text-white xs:text-lg md:text-3xl lg:text-xl 2xl:text-3xl">
+                  <div className="mb-8 flex w-full items-center justify-center font-bold text-white xs:text-lg md:text-4xl  lg:text-3xl xl:text-4xl ">
                     <h2>
                       {t("score")} : {settings.match.length}
                     </h2>
                   </div>
                   <div
                     className={clsx(
-                      " h-full w-full  font-bold  text-white  xs:text-lg md:text-3xl lg:text-xl 2xl:text-3xl",
+                      " h-full w-full  font-bold  text-white  xs:text-lg md:text-4xl  lg:text-3xl xl:text-4xl ",
                       { " flex items-end justify-end": locale === "en" }
                     )}
                   >

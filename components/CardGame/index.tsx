@@ -38,7 +38,7 @@ export function CardGame() {
                 if (!settings.muted) audio().play();
               }}
               className={clsx(
-                "rounded-2xl xs:h-24 xs:w-20 md:h-40 md:w-32 lg:h-20 lg:w-16 xl:h-32 xl:w-28  2xl:h-36 2xl:w-36 ",
+                "rounded-2xl xs:h-24 xs:w-20 md:h-48 md:w-40 lg:h-28 lg:w-32 xl:h-40 xl:w-44  2xl:h-44 2xl:w-44 ",
                 {
                   "blinking-border":
                     idx === settings.flipCard1.idx ||
